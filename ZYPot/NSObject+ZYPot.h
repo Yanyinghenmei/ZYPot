@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (ZYPot)
-
++ (NSArray *)modelsWithArr:(NSArray *)arr;
 @end

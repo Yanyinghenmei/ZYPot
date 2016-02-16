@@ -15,6 +15,8 @@
 		659232D51C72BE7800C8834F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659232D31C72BE7800C8834F /* LaunchScreen.storyboard */; };
 		659232E01C72BE7800C8834F /* ZYPotDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 659232DF1C72BE7800C8834F /* ZYPotDemoTests.m */; };
 		659232EB1C72BE7800C8834F /* ZYPotDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 659232EA1C72BE7800C8834F /* ZYPotDemoUITests.m */; };
+		659232FB1C72BECF00C8834F /* NSObject+ZYPot.m in Sources */ = {isa = PBXBuildFile; fileRef = 659232FA1C72BECF00C8834F /* NSObject+ZYPot.m */; settings = {ASSET_TAGS = (); }; };
+		659232FE1C72C29300C8834F /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 659232FD1C72C29300C8834F /* Model.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		659232E61C72BE7800C8834F /* ZYPotDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZYPotDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		659232EA1C72BE7800C8834F /* ZYPotDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYPotDemoUITests.m; sourceTree = "<group>"; };
 		659232EC1C72BE7800C8834F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		659232F91C72BECF00C8834F /* NSObject+ZYPot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZYPot.h"; sourceTree = "<group>"; };
+		659232FA1C72BECF00C8834F /* NSObject+ZYPot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZYPot.m"; sourceTree = "<group>"; };
+		659232FC1C72C29300C8834F /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		659232FD1C72C29300C8834F /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		659232B91C72BE7800C8834F = {
 			isa = PBXGroup;
 			children = (
+				659232F81C72BEBA00C8834F /* ZYPot */,
 				659232C41C72BE7800C8834F /* ZYPotDemo */,
 				659232DE1C72BE7800C8834F /* ZYPotDemoTests */,
 				659232E91C72BE7800C8834F /* ZYPotDemoUITests */,
@@ -105,6 +112,8 @@
 				659232C91C72BE7800C8834F /* AppDelegate.m */,
 				659232CB1C72BE7800C8834F /* ViewController.h */,
 				659232CC1C72BE7800C8834F /* ViewController.m */,
+				659232FC1C72C29300C8834F /* Model.h */,
+				659232FD1C72C29300C8834F /* Model.m */,
 				659232CE1C72BE7800C8834F /* Main.storyboard */,
 				659232D11C72BE7800C8834F /* Assets.xcassets */,
 				659232D31C72BE7800C8834F /* LaunchScreen.storyboard */,
@@ -138,6 +147,15 @@
 				659232EC1C72BE7800C8834F /* Info.plist */,
 			);
 			path = ZYPotDemoUITests;
+			sourceTree = "<group>";
+		};
+		659232F81C72BEBA00C8834F /* ZYPot */ = {
+			isa = PBXGroup;
+			children = (
+				659232F91C72BECF00C8834F /* NSObject+ZYPot.h */,
+				659232FA1C72BECF00C8834F /* NSObject+ZYPot.m */,
+			);
+			path = ZYPot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,9 +288,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				659232FB1C72BECF00C8834F /* NSObject+ZYPot.m in Sources */,
 				659232CD1C72BE7800C8834F /* ViewController.m in Sources */,
 				659232CA1C72BE7800C8834F /* AppDelegate.m in Sources */,
 				659232C71C72BE7800C8834F /* main.m in Sources */,
+				659232FE1C72C29300C8834F /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
