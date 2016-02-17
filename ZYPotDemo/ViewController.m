@@ -22,8 +22,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    // 当字典中的键和属性名不一致时
+    [Model setPropertyMapDictionary:@{@"int_":@"int"}];
     // 运行时封装模型
     NSDictionary *dataDic = @{
+        @"int" : @"123",
+        @"id" : @"123",
         @"address" : @"China",
         @"addtime" : @"1451900764",
         @"birth" : @"2016-01-01",

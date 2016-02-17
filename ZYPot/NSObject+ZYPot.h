@@ -9,5 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (ZYPot)
+// 数组––>模型数组
 + (NSArray *)modelsWithArr:(NSArray *)arr;
+
+// 字典––>模型
++ (id)modelWithDic:(NSDictionary *)dic;
+
+// 映射字典  {@"int":@"int_"}
++ (void)setPropertyMapDictionary:(NSDictionary *)dictionary;
+
 @end

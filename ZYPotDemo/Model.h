@@ -26,4 +26,6 @@
 
 @property (nonatomic, copy)NSString *user_id;
 @property (nonatomic, copy)NSString *weight;
+@property (nonatomic, copy)NSString *id;
+@property (nonatomic, copy)NSString *int_;
 @end

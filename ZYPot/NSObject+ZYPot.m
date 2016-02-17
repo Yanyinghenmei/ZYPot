@@ -9,6 +9,7 @@
 #import "NSObject+ZYPot.h"
 #import <objc/runtime.h>
 
+
 @implementation NSObject (ZYPot)
 + (NSArray *)modelsWithArr:(NSArray *)arr {
     
@@ -25,10 +26,20 @@
     NSArray *propertyNames = [self allPropertyNames];
     
     for (int i = 0; i < propertyNames.count; i++) {
-        SEL setSel = [self setterWithPropertyName:propertyNames[i]];
+        // 属性名
+        NSString *propertyName = propertyNames[i];
         
-        //属性值
-        NSString *str = [NSString stringWithFormat:@"%@", dic[propertyNames[i]]];
+        SEL setSel = [self setterWithPropertyName:propertyName];
+        
+        // 属性值
+        NSString *str = [NSString stringWithFormat:@"%@", dic[propertyName]];
+        
+        // 当字典中的键和属性名不一致时
+        if ([str isEqualToString:@"(null)"] || !str.length) {
+            NSDictionary *propertyMapDictionary = [self propertyMapDictionary];
+            NSString *newPropertyName = propertyMapDictionary[propertyName];
+            str = dic[newPropertyName];
+        }
         
         if (str.length&&[model respondsToSelector:setSel]) {
             IMP setterImp = [model methodForSelector:setSel];
@@ -37,7 +48,19 @@
             // id result = [model performSelector:setSel withObject:str];
         }
     }
+    [self propertyMapDictionary];
     return model;
+}
+
++ (NSDictionary *)propertyMapDictionary {
+    NSDictionary *dic = objc_getAssociatedObject(self, "propertyMapDic");
+    return dic;
+}
+
+// 给模型类添加一个属性
+// 关联 参考资料:http://blog.csdn.net/onlyou930/article/details/9299169
++ (void)setPropertyMapDictionary:(NSDictionary *)dictionary {
+    objc_setAssociatedObject(self, "propertyMapDic", dictionary, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 // 根据属性名生成setter方法
@@ -47,7 +70,9 @@
     // 不能直接使用 capitalizedString 方法
     NSString *header = [propertyName substringWithRange:NSMakeRange(0, 1)];
     
-    NSString *str = [NSString stringWithFormat:@"%@%@", [header capitalizedString], [propertyName substringWithRange:NSMakeRange(1, propertyName.length-1)]];
+    NSString *str = [NSString stringWithFormat:@"%@%@",
+                     [header capitalizedString],
+                     [propertyName substringWithRange:NSMakeRange(1, propertyName.length-1)]];
     
     NSString *setterName = [NSString stringWithFormat:@"set%@:", str];
 
@@ -70,4 +95,26 @@
     free(propertyList);
     return allNames;
 }
+
+
+// 使用|class_addProperty| 和 |class_getProperty| 添加和读取属性
+
+//+ (void)propertyMapDictionary {
+//    objc_property_t property = class_getProperty(self, "propertyMapDic");
+//    NSString* propertyAttributes = [NSString stringWithUTF8String:property_getAttributes(property)];
+//    NSArray* splitPropertyAttributes = [propertyAttributes componentsSeparatedByString:@"\""];
+//    if ([splitPropertyAttributes count] >= 2)
+//    {
+//        NSLog(@"Class of property: %@", [splitPropertyAttributes objectAtIndex:1]);
+//    }
+//}
+//
+//// 给模型类添加一个属性
+//+ (BOOL)setPropertyMapDictionary:(NSDictionary *)dictionary {
+//    objc_property_attribute_t backingivar  = { "Vaasdf", "_privateName" };
+//    objc_property_attribute_t attributes[] = {backingivar};
+//    class_addProperty(self, "propertyMapDic", attributes, 1);
+//    return YES;
+//}
+
 @end
