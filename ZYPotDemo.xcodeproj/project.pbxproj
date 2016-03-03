@@ -57,6 +57,7 @@
 		659232FA1C72BECF00C8834F /* NSObject+ZYPot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZYPot.m"; sourceTree = "<group>"; };
 		659232FC1C72C29300C8834F /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		659232FD1C72C29300C8834F /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		65DCE8FA1C883E3200FD994F /* ZYPot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYPot.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +153,7 @@
 		659232F81C72BEBA00C8834F /* ZYPot */ = {
 			isa = PBXGroup;
 			children = (
+				65DCE8FA1C883E3200FD994F /* ZYPot.h */,
 				659232F91C72BECF00C8834F /* NSObject+ZYPot.h */,
 				659232FA1C72BECF00C8834F /* NSObject+ZYPot.m */,
 			);
@@ -516,6 +518,7 @@
 				659232F11C72BE7800C8834F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		659232F21C72BE7800C8834F /* Build configuration list for PBXNativeTarget "ZYPotDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +527,7 @@
 				659232F41C72BE7800C8834F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		659232F51C72BE7800C8834F /* Build configuration list for PBXNativeTarget "ZYPotDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +536,7 @@
 				659232F71C72BE7800C8834F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,9 +8,11 @@
 
 #import "NSObject+ZYPot.h"
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 
 @implementation NSObject (ZYPot)
+
 + (NSArray *)modelsWithArr:(NSArray *)arr {
     
     NSMutableArray *models = @[].mutableCopy;
@@ -42,13 +44,19 @@
         }
         
         if (str.length&&[model respondsToSelector:setSel]) {
+            // 函数指针
             IMP setterImp = [model methodForSelector:setSel];
             void (*func)(id, SEL, NSString *) = (void *)setterImp;
             func(model,setSel,str);
+            
+            // 有警报
             // id result = [model performSelector:setSel withObject:str];
+            
+            // 使用本函数 需要引入  <objc/message>
+            // 需要设置 Enable Strict Checking of objc_msgSend Calls  为 NO
+            // objc_msgSend(model,setSel,str);
         }
     }
-    [self propertyMapDictionary];
     return model;
 }
 
@@ -96,6 +104,41 @@
     return allNames;
 }
 
+- (void)setValuesWithDic:(NSDictionary *)dic {
+    
+    NSArray *propertyNames = [[self class] allPropertyNames];
+    
+    for (int i = 0; i < propertyNames.count; i++) {
+        // 属性名
+        NSString *propertyName = propertyNames[i];
+        
+        SEL setSel = [[self class] setterWithPropertyName:propertyName];
+        
+        // 属性值
+        NSString *str = [NSString stringWithFormat:@"%@", dic[propertyName]];
+        
+        // 当字典中的键和属性名不一致时
+        if ([str isEqualToString:@"(null)"] || !str.length) {
+            NSDictionary *propertyMapDictionary = [[self class] propertyMapDictionary];
+            NSString *newPropertyName = propertyMapDictionary[propertyName];
+            str = dic[newPropertyName];
+        }
+        
+        if (str.length&&[self respondsToSelector:setSel]) {
+            // 函数指针
+            IMP setterImp = [self methodForSelector:setSel];
+            void (*func)(id, SEL, NSString *) = (void *)setterImp;
+            func(self,setSel,str);
+            
+            // 有警报
+            // id result = [model performSelector:setSel withObject:str];
+            
+            // 使用本函数 需要引入  <objc/message>
+            // 需要设置 Enable Strict Checking of objc_msgSend Calls  为 NO
+            // objc_msgSend(model,setSel,str);
+        }
+    }
+}
 
 // 使用|class_addProperty| 和 |class_getProperty| 添加和读取属性
 

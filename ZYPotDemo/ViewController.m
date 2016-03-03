@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import "NSObject+ZYPot.h"
+#import "ZYPot.h"
 
 #import "Model.h"
 

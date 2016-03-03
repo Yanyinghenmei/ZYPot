@@ -18,4 +18,9 @@
 // 映射字典  {@"int":@"int_"}
 + (void)setPropertyMapDictionary:(NSDictionary *)dictionary;
 
++ (NSArray *)allPropertyNames;
++ (SEL)setterWithPropertyName:(NSString *)propertyName;
+
+- (void)setValuesWithDic:(NSDictionary *)dic;
+
 @end
