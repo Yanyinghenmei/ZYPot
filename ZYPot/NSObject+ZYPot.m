@@ -25,38 +25,9 @@
 
 + (id)modelWithDic:(NSDictionary *)dic {
     NSObject *model = self.new;
-    NSArray *propertyNames = [self allPropertyNames];
     
-    for (int i = 0; i < propertyNames.count; i++) {
-        // 属性名
-        NSString *propertyName = propertyNames[i];
-        
-        SEL setSel = [self setterWithPropertyName:propertyName];
-        
-        // 属性值
-        NSObject *obj = dic[propertyName];
-        
-        // 当字典中的键和属性名不一致时
-        if ([[NSString stringWithFormat:@"%@", obj] isEqualToString:@"(null)"] || !obj) {
-            NSDictionary *propertyMapDictionary = [self propertyMapDictionary];
-            NSString *newPropertyName = propertyMapDictionary[propertyName];
-            obj = dic[newPropertyName];
-        }
-        
-        if (obj && [model respondsToSelector:setSel]) {
-            // 函数指针
-            IMP setterImp = [model methodForSelector:setSel];
-            void (*func)(id, SEL, id) = (void *)setterImp;
-            func(model,setSel,obj);
-            
-            // 有警报
-            // id result = [model performSelector:setSel withObject:str];
-            
-            // 使用本函数 需要引入  <objc/message>
-            // 需要设置 Enable Strict Checking of objc_msgSend Calls  为 NO
-            // objc_msgSend(model,setSel,str);
-        }
-    }
+    [model setValuesWithDic:dic];
+    
     return model;
 }
 
