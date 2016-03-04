@@ -18,9 +18,13 @@
 // 映射字典  {@"int":@"int_"}
 + (void)setPropertyMapDictionary:(NSDictionary *)dictionary;
 
+// 所有属性名
 + (NSArray *)allPropertyNames;
+
+// 属性名––>SEL
 + (SEL)setterWithPropertyName:(NSString *)propertyName;
 
+// 给模型的属性赋值
 - (void)setValuesWithDic:(NSDictionary *)dic;
 
 @end

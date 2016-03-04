@@ -34,7 +34,7 @@
         @"blood_type" : @"B",
         @"constellation" : @"Capricorn",
         @"email" : @"******@qq.com",
-        @"expire_time" : @"1735983720",
+        @"expire_time" : @1735983720,
         @"height" : @"185",
         @"name" : @"Daniel",
         @"preferences" : @"1,2,3",
