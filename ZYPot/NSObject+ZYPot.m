@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-
+static char propertMapDic;
 @implementation NSObject (ZYPot)
 
 + (NSArray *)modelsWithArr:(NSArray *)arr {
@@ -32,14 +32,14 @@
 }
 
 + (NSDictionary *)propertyMapDictionary {
-    NSDictionary *dic = objc_getAssociatedObject(self, "propertyMapDic");
+    NSDictionary *dic = objc_getAssociatedObject(self, &propertMapDic);
     return dic;
 }
 
 // 给模型类添加一个属性
 // 关联 参考资料:http://blog.csdn.net/onlyou930/article/details/9299169
 + (void)setPropertyMapDictionary:(NSDictionary *)dictionary {
-    objc_setAssociatedObject(self, "propertyMapDic", dictionary, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &propertMapDic, dictionary, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 // 根据属性名生成setter方法
@@ -56,6 +56,12 @@
     NSString *setterName = [NSString stringWithFormat:@"set%@:", str];
 
     return NSSelectorFromString(setterName);
+}
+
+// 根据属性名生成getter方法
++ (SEL)getterWithPropertyName:(NSString *)propertyName {
+    
+    return NSSelectorFromString(propertyName);
 }
 
 // 获取所有属性名
@@ -113,6 +119,27 @@
             func(self,setSel,nil);
         }
     }
+}
+
+- (NSDictionary *)keyValues {
+    NSArray *propertyNames = [[self class] allPropertyNames];
+    NSMutableDictionary *propertyDic = @{}.mutableCopy;
+    
+    for (int i = 0; i < propertyNames.count; i++) {
+        // 属性名
+        NSString *propertyName = propertyNames[i];
+        
+        SEL getSel = [[self class] getterWithPropertyName:propertyName];
+        
+        // 函数指针
+        IMP getterImp = [self methodForSelector:getSel];
+        id (*func)(id, SEL, id) = (void *)getterImp;
+        id value = func(self,getSel,nil);
+        
+        [propertyDic setValue:value forKey:propertyName];
+    }
+    
+    return propertyDic;
 }
 
 // 使用|class_addProperty| 和 |class_getProperty| 添加和读取属性

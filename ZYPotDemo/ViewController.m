@@ -51,6 +51,9 @@
     Model *model = modelArr[0];
     
     NSLog(@"expire_time:%@", model.expire_time);
+    
+    NSDictionary *dic = [model keyValues];
+    NSLog(@"dic :%@", dic);
 }
 
 - (void)didReceiveMemoryWarning {

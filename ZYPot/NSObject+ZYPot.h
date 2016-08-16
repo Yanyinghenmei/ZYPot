@@ -27,4 +27,7 @@
 // 给模型的属性赋值
 - (void)setValuesWithDic:(NSDictionary *)dic;
 
+// 模型––>字典
+- (NSDictionary *)keyValues;
+
 @end
